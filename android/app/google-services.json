@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "490110946558",
+    "project_id": "iwallet-befa0",
+    "storage_bucket": "iwallet-befa0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490110946558:android:6d43b1c84567f94c64e9af",
+        "android_client_info": {
+          "package_name": "com.example.apple_pay_clone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnS2rqMnpmQGF2HDLz3pLpawbdJpR_n-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
