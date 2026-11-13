@@ -21,7 +21,7 @@ jobs:
           flutter-version: '3.24.0'
           channel: 'stable'
 
-      - name: Ensure Android platform files and Gradle 8.6
+      - name: Configure Android SDK 36 and AGP 8.6.0
         run: |
           flutter create . --platforms=android --org com.example --project-name apple_pay_clone
           mkdir -p android/gradle/wrapper
@@ -30,8 +30,17 @@ jobs:
           distributionPath=wrapper/dists
           zipStoreBase=GRADLE_USER_HOME
           zipStorePath=wrapper/dists
-          distributionUrl=https\://services.gradle.org/distributions/gradle-8.6-all.zip
+          distributionUrl=https\://services.gradle.org/distributions/gradle-8.7-all.zip
           EOF
+          sed -i 's/com.android.application" version "[0-9.]*"/com.android.application" version "8.6.0"/g' android/settings.gradle || true
+          sed -i "s/com.android.application' version '[0-9.]*'/com.android.application' version '8.6.0'/g" android/settings.gradle || true
+          sed -i 's/com.android.tools.build:gradle:[0-9.]*/com.android.tools.build:gradle:8.6.0/g' android/build.gradle || true
+          sed -i 's/org.jetbrains.kotlin.android" version "[0-9.]*"/org.jetbrains.kotlin.android" version "1.9.24"/g' android/settings.gradle || true
+          sed -i "s/org.jetbrains.kotlin.android' version '[0-9.]*'/org.jetbrains.kotlin.android' version '1.9.24'/g" android/settings.gradle || true
+          sed -i 's/compileSdkVersion .*/compileSdk = 36/g' android/app/build.gradle
+          sed -i 's/compileSdk .*/compileSdk = 36/g' android/app/build.gradle
+          sed -i 's/ndkVersion .*/ndkVersion = "25.1.8937393"/g' android/app/build.gradle
+          grep -q "ndkVersion" android/app/build.gradle || sed -i 's/compileSdk = 36/compileSdk = 36\n    ndkVersion = "25.1.8937393"/' android/app/build.gradle
 
       - name: Install dependencies
         run: flutter pub get
