@@ -120,7 +120,7 @@ class _WalletScreenState extends State<WalletScreen> {
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(CupertinoIcons.wave_3_right, size: 22),
+                              Icon(CupertinoIcons.radiowaves_right, size: 22),
                               SizedBox(width: 8),
                               Text('ادفع الآن (NFC / QR)',
                                   style: TextStyle(fontWeight: FontWeight.bold)),
