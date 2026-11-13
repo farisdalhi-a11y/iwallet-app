@@ -21,8 +21,17 @@ jobs:
           flutter-version: '3.24.0'
           channel: 'stable'
 
-      - name: Ensure Android platform files
-        run: flutter create . --platforms=android --org com.example --project-name apple_pay_clone
+      - name: Ensure Android platform files and Gradle 8.6
+        run: |
+          flutter create . --platforms=android --org com.example --project-name apple_pay_clone
+          mkdir -p android/gradle/wrapper
+          cat << 'EOF' > android/gradle/wrapper/gradle-wrapper.properties
+          distributionBase=GRADLE_USER_HOME
+          distributionPath=wrapper/dists
+          zipStoreBase=GRADLE_USER_HOME
+          zipStorePath=wrapper/dists
+          distributionUrl=https\://services.gradle.org/distributions/gradle-8.6-all.zip
+          EOF
 
       - name: Install dependencies
         run: flutter pub get
