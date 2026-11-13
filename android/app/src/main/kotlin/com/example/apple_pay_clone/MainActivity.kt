@@ -17,7 +17,6 @@ class MainActivity : FlutterFragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // تفعيل حماية الشاشة ومنع التصوير أو التسجيل (FLAG_SECURE)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
@@ -61,8 +60,8 @@ class MainActivity : FlutterFragmentActivity() {
         val flags = NfcAdapter.FLAG_READER_NFC_A or NfcAdapter.FLAG_READER_SKIP_NDEF_CHECK
         nfcAdapter?.enableReaderMode(this, { tag: Tag ->
             try {
-                val isoDep = IsoDep.get(tag)
-                isoDep?.connect()
+                val isoDep = IsoDep.get(tag) ?: return@enableReaderMode
+                isoDep.connect()
                 val selectApdu = byteArrayOf(
                     0x00.toByte(), 0xA4.toByte(), 0x04.toByte(), 0x00.toByte(),
                     0x07.toByte(), 0xF0.toByte(), 0x01.toByte(), 0x02.toByte(),
